@@ -1,0 +1,267 @@
+# Mengakses List atau Tuple Part 1
+
+bulan_pembelian = ('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember')
+print(bulan_pembelian[0]) #menampilkan Januari
+print(bulan_pembelian[5]) #menampilkan Juni
+print(bulan_pembelian[-1]) #menampilkan Desember
+print(bulan_pembelian[-2]) #menampilkan November
+
+
+# Mengakses List atau Tuple Part 2
+
+bulan_pembelian = ('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember')
+pertengahan_tahun = bulan_pembelian[4:8]
+print(pertengahan_tahun) #menampilkan Mei, Juni, Juli, Agustus (walaupun ditulis 4 s/d 8, hanya dihitung sampai index ke-7
+
+awal_tahun = bulan_pembelian[:5]
+print(awal_tahun) #menampilkan Januari, Februari, Maret, April, Mei
+
+akhir_tahun = bulan_pembelian[8:]
+print(akhir_tahun) #menampilkan September, Oktober, November, Desember
+print(bulan_pembelian[-4:-1]) #menampilkan September, Oktober, November (indeks (-1) tidak termasuk)
+
+
+# Penggabungan Dua atau Lebih List atau Tuple
+
+list_makanan = ['Gado-gado', 'Ayam Goreng', 'Rendang']
+list_minuman = ['Es Teh', 'Es Jeruk', 'Es Campur']
+list_menu = list_makanan + list_minuman
+print(list_menu)
+#Output ['Gado-gado', 'Ayam Goreng', 'Rendang', 'Es Teh', 'Es Jeruk', 'Es Campur'] 
+
+
+# List Manipulation
+
+# Fitur .append()
+# Menambahkan data di akhir list
+print(">>> Fitur .append()")
+list_makanan = ['Gado-gado', 'Ayam Goreng', 'Rendang']
+list_makanan.append('Ketoprak')
+print(list_makanan) #menampilkan ['Gado-gado', 'Ayam Goreng', 'Rendang', 'Ketoprak']
+
+# Fitur .clear()
+# Menghapus list
+print(">>> Fitur .clear()")
+list_makanan = ['Gado-gado', 'Ayam Goreng', 'Rendang']
+list_makanan.clear()
+print(list_makanan) #menampilkan []
+
+# Fitur .copy()
+# Menyalin list
+print(">>> Fitur .copy()")
+list_makanan1 = ['Gado-gado', 'Ayam Goreng', 'Rendang']
+list_makanan2 = list_makanan1.copy()
+list_makanan3 = list_makanan1
+list_makanan2.append('Opor')
+list_makanan3.append('Ketoprak')
+print(list_makanan1) #menampilkan ['Gado-gado', 'Ayam Goreng', 'Rendang', 'Ketoprak'] karena pada list_makanan3 ditambah 'Ketoprak'
+print(list_makanan2) #menampilkan ['Gado-gado', 'Ayam Goreng', 'Rendang', Opor]
+
+# Fitur .count()
+# Menghitung jumlah data tertentu pada suatu list
+print(">>> Fitur .count()")
+list_score = ['Budi', 'Sud', 'Budi', 'Budi', 'Budi', 'Sud', 'Sud']
+score_budi = list_score.count('Budi')
+score_sud = list_score.count('Sud')
+print(score_budi) # akan menampilkan output 4
+print(score_sud) # akan menampilkan output 3
+
+# Fitur .extend()
+# Menggabungkan list
+print(">>> Fitur .extend()")
+list_menu = ['Gado-gado', 'Ayam Goreng', 'Rendang']
+list_minuman = ['Es Teh', 'Es Jeruk', 'Es Campur']
+list_menu.extend(list_minuman)
+print(list_menu) #menampilkan ['Gado-gado', 'Ayam Goreng', 'Rendang', 'Es Teh', 'Es Jeruk', 'Es Campur']
+
+# Fitur .index()
+# Menampilkan indeks dari data
+print(">>> Fitur .index()")
+list_score = ['Budi','Sud','Budi','Budi','Budi','Sud','Sud']
+score_pertama_sud = list_score.index('Sud') + 1
+print(score_pertama_sud) # akan menampilkan output 2 karena indeks 'Sud' adalah 1
+
+# Fitur .insert()
+# Memasukkan data pada indeks tertentu
+print(">>> Fitur .insert()")
+list_score = ['Budi','Sud','Budi','Budi','Sud']
+list_score.insert(3, 'Sud')
+print(list_score) #menampilkan ['Budi','Sud','Budi','Sud','Budi','Sud'] 'Sud' ditambahkan di indeks 3
+
+# Fitur .pop()
+# Menghilangkan data pada indeks tertentu
+print(">>> Fitur .pop()")
+list_menu = ['Gado-gado', 'Ayam Goreng', 'Rendang']
+list_menu.pop(1) #menghilangkan indeks 1, yaitu 'Ayam Goreng'. Akan menampilkan ['Gado-gado', 'Rendang']
+print(list_menu)
+
+# Fitur .remove()
+# Menghapus elemen tertentu
+print(">>> Fitur .remove()")
+list_menu = ['Gado-gado', 'Ayam Goreng', 'Rendang', 'Ketoprak']
+list_menu.remove('Rendang')
+print(list_menu) #akan menampilkan ['Gado-gado', 'Ayam Goreng', 'Ketoprak']
+
+# Fitur .reverse()
+# Membalikkan urutan
+print(">>> Fitur .reverse()")
+list_menu = ['Gado-gado', 'Ayam Goreng', 'Rendang', 'Ketoprak']
+list_menu.reverse()
+print(list_menu) #akan menampilkan ['Ketoprak', 'Rendang', 'Ayam Goreng', 'Gado-gado']
+
+# Fitur .sort()
+# Mengurutkan
+print(">>> Fitur .sort()")
+list_menu = ['Gado-gado', 'Ayam Goreng', 'Rendang', 'Ketoprak']
+list_menu.sort() # Default: Ascending
+print(list_menu) 
+list_menu.sort(reverse=True)# Descending
+print(list_menu)
+
+
+# Set Manipulation
+
+# Fitur .add()
+# Menambah data
+print(">>> Fitur .add()")
+set_buah = {'Jeruk','Apel','Anggur'}
+set_buah.add('Melon')
+print(set_buah) #menampilkan {'Anggur', 'Jeruk', 'Melon', 'Apel'}
+
+# Fitur .clear()
+# Menghapus seluruh data set
+print(">>> Fitur .clear()")
+set_buah = {'Jeruk','Apel','Anggur'}
+set_buah.clear()
+print(set_buah) #menampilkan set()
+
+# Fitur .copy()
+# Menyalin data set
+print(">>> Fitur .copy()")
+set_buah1 = {'Jeruk','Apel','Anggur'}
+set_buah2 = set_buah1
+set_buah3 = set_buah1.copy()
+set_buah2.add('Melon')
+set_buah3.add('Kiwi')
+print(set_buah1)
+print(set_buah2)
+
+# Fitur .update()
+# Menambahkan data set dari set lainnya (dua set)
+print(">>> Fitur .update()")
+parcel1 = {'Anggur','Apel','Jeruk'}
+parcel2 = {'Apel','Kiwi','Melon'}
+parcel1.update(parcel2)
+print(parcel1) #akan menampilkan {'Melon', 'Kiwi', 'Jeruk', 'Anggur', 'Apel'}
+
+# Fitur .pop()
+# Menghilangkan elemen pada set secara acak
+print(">>> Fitur .pop()")
+parcel = {'Anggur','Apel','Jeruk'}
+buah = parcel.pop()
+print(buah)
+print(parcel)
+
+# Fitur .remove()
+# Menghilangkan elemen tertentu
+print(">>> Fitur .remove()")
+parcel = {'Anggur','Apel','Jeruk'}
+parcel.remove('Apel')
+print(parcel)
+
+# Fitur .union()
+# Menggabungkan dua set
+print(">>> Fitur .union()")
+parcel1 = {'Anggur','Apel','Jeruk'}
+parcel2 = {'Apel','Kiwi','Melon'}
+parcel3 = parcel1.union(parcel2)
+print(parcel1)
+print(parcel3)
+
+# Fitur .isdisjoint()
+# Menampilkan True or False, jika kedua data tidak mengandung satu sama lain
+print(">>> Fitur .isdisjoint()")
+parcel1 = {'Anggur','Apel','Jeruk'}
+parcel2 = {'Kiwi','Melon','Pisang'}
+parcel3 = {'Apel','Srikaya','Semangka'}
+parcel1_parcel2_disjoint = parcel1.isdisjoint(parcel2) #apakah parcel1 bukan bagian dari parcel2
+print(parcel1_parcel2_disjoint)
+parcel1_parcel3_disjoint = parcel1.isdisjoint(parcel3) #apakah parcel1 bukan bagian dari parcel3
+print(parcel1_parcel3_disjoint)
+
+# Fitur .issubset()
+# Menampilkan True or False, apakah satu set bagian dari set lainnya
+print(">>> Fitur .issubset()")
+parcel_A = {'Anggur', 'Apel'}
+parcel_B = {'Durian','Semangka','Apel'}
+parcel_C = {'Anggur', 'Kiwi', 'Apel', 'Jeruk', 'Melon'}
+parcel_A_dalam_C = parcel_A.issubset(parcel_C) #apakah parcelA bagian dari parcelC
+parcel_B_dalam_C = parcel_B.issubset(parcel_C) #apakah parcelB bagian dari parcelC
+print(parcel_A_dalam_C) #True
+print(parcel_B_dalam_C) #False
+
+# Fitur .issuperset()
+print(">>> Fitur .issuperset()")
+parcel_C_mengandung_A = parcel_C.issuperset(parcel_A)
+parcel_C_mengandung_B = parcel_C.issuperset(parcel_B)
+print(parcel_C_mengandung_A) #True
+print(parcel_C_mengandung_B) #False
+
+# Fitur .intersection()
+# Menampilkan elemen yang sama pada dua set
+print(">>> Fitur .intersection()")
+parcel_A = {'Anggur', 'Kiwi', 'Apel', 'Jeruk', 'Melon'}
+parcel_B = {'Apel', 'Jeruk', 'Semangka', 'Durian', 'Tomat'}
+parcel_C = parcel_A.intersection(parcel_B)
+print(parcel_C)
+
+# Fitur .difference()
+# Menampilkan elemen yang bukan bagian irisan dari set lainnya
+print(">>> Fitur .difference()")
+parcel_C = parcel_A.difference(parcel_B) #elemen parcel_A yang tidak ada di parcel_B
+print(parcel_C)
+
+# Fitur .symmetric_difference()
+# Union dari difference di setiap data set
+print(">>> Fitur .symmetric_difference()")
+parcel_A = {'Anggur', 'Apel', 'Jeruk', 'Melon'}
+parcel_B = {'Apel','Jeruk','Semangka','Leci'}
+parcel_C = parcel_A.symmetric_difference(parcel_B)
+print(parcel_C)
+
+# Fitur .clear()
+# Menghapus dictionary
+print(">>> Fitur .clear()")
+info_karyawan = {'nama' : 'Aksara',
+                 'nik' : '1211011',
+                 'pekerjaan' : 'Data Analyst'}
+info_karyawan.clear()
+print(info_karyawan) #output {}
+
+# Fitur .copy()
+# Menyalin dictionary
+print(">>> Fitur .copy()")
+info_karyawan1 = {'nama' : 'Aksara',
+                  'nik' : '1211011',
+                  'pekerjaan' : 'Data Analyst'}
+info_karyawan2 = info_karyawan1.copy()
+info_karyawan2['nama'] = 'Senja'
+info_karyawan2['nik'] = '1211056'
+print(info_karyawan1)
+print(info_karyawan2)
+
+# Fitur .keys()
+print(">>> Fitur .keys()")
+info_karyawan = {'nama' : 'Aksara',
+                 'nik' : '1211011',
+                 'pekerjaan' : 'Data Analyst'}
+kunci_akses = list(info_karyawan.keys())
+print(kunci_akses)
+# Fitur .values()
+print(">>> Fitur .values()")
+value_dict = list(info_karyawan.values())
+print(value_dict)
+# Fitur .update()
+print(">>> Fitur .update()")
+info_karyawan.update({'skillset':['Python', 'R']})
+print(info_karyawan)
