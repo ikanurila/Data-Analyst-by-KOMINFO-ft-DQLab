@@ -1,0 +1,50 @@
+# Tugas Praktek
+# Membuat diagram distribusi price
+import pandas as pd
+import matplotlib.pyplot as plt
+order_df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/order.csv")
+# plot histogram kolom: price
+order_df[["price"]].hist(figsize=(4, 5), bins=10, xlabelsize=8, ylabelsize=8)
+plt.show()  # Untuk menampilkan histogram plot
+
+# Standar variasi kolom product_weight_gram
+order_df.loc[:, "product_weight_gram"].std()
+# Varians kolom product_weight_gram
+order_df.loc[:, "product_weight_gram"].var()
+
+# Menentukan outliers
+# Hitung quartile 1
+Q1 = order_df[["product_weight_gram"]].quantile(0.25)
+# Hitung quartile 3
+Q3 = order_df[["product_weight_gram"]].quantile(0.75)
+# Hitung inter quartile range dan cetak ke console
+IQR = Q3 - Q1
+print(IQR)
+print((order_df < (Q1 - 1.5 * IQR)) | (order_df > (Q3 - 1.5 * IQR))) # menampilkan apakah ada outliers, ada outliers ketika bernilai TRUE
+
+# Mengganti nama kolom
+# Dengan rename
+# Ganti nama kolom freight_value menjadi shipping_cost
+order_df.rename(columns={"freight_value": "shipping_cost"}, inplace=True)
+print(order_df)
+# Dengan indeks
+order_df.columns.values[2] = "shipping cost" # yang di dalam kurung siku adalah indeksnya
+
+
+# Menggunakan .groupby untuk agregasi
+# Hitung rata rata dari price per payment_type
+rata_rata = order_df["price"].groupby(order_df["payment_type"]).mean()
+print(rata_rata)
+
+
+# Sorting dengan Pandas
+# Hitung harga maksimum pembelian customer
+sort_harga = order_df.sort_values(by="price", ascending= False)
+print(sort_harga)
+# CATATAN: ASCENDING = FALSE, BERARTI DARI DATA TERBESAR KE TERKECIL
+
+# Sroting dengan 2 kategori
+sort_produk = order_df.sort_values(by=["price","freight_weight"], ascending = [False, True])
+
+
+
