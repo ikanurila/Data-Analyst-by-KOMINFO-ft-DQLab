@@ -1,0 +1,36 @@
+# Memanggil library di Python
+# library /nama_library/ as /alias/
+import numpy as np
+import pandas as pd
+
+
+
+# Explanatory Data Analysis dengan Pandas - Part 1
+
+# Tugas Praktek
+# import data
+import pandas as pd
+order_df = pd.read_csv("https://storage.googleapis.com/dqlab-dataset/order.csv")
+
+# mengetahui struktur data
+print(order_df.shape)
+
+# preview data
+print(order_df.head(10)) # >>>>> menampilkan 10 baris data teratas
+print(order_df.tail(10)) # >>>>> menampilkan 10 baris data terbawah
+print(order_df.head()) # >>>>> menampilkan 5 baris data teratas (default 5 baris)
+print(order_df.tail()) # >>>>> menampilkan 5 baris data terbawah (default 5 baris)
+
+# summary
+# order_df adalah nama_dataframe
+print(order_df.describe()) # >>>>>> menampilkan summary dari kolom dengan tipe data numerik
+print(order_df.describe(include=["object"])) # >>>>> menampilkan summary dari kolom dengan tipe data non numerik
+print(order_df.describe(include =["all"])) # >>>>> menampilkan summary dari semua kolom dengan tipe data apapun
+print(order_df.loc[:, "price"].mean()) # >>>>> menampilkan mean dari kolom price
+print(order_df.loc[:, "price"].median()) # >>>>> menampilkan median dari kolom price
+print(order_df.loc[:, "price"].mode()) # >>>>> menampilkan modus dari kolom price
+
+# Quick summary  dari segi kuantitas, harga, freight value, dan weight
+print(order_df.describe())
+# Median dari total pembelian konsumen per transaksi kolom price
+print(order_df.loc[:,"price"].median())
