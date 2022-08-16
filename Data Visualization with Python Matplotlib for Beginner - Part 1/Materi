@@ -1,0 +1,63 @@
+# Monthly GMV Year 2019
+
+
+# library pandas untuk import data
+import pandas as pd
+# library untuk manipulasi waktu
+import datetime
+# library untuk membuat grafik
+import matplotlib.pyplot as plt
+
+
+# membaca dataset
+dataset = pd.read_csv('https://storage.googleapis.com/dqlab-dataset/retail_raw_reduced.csv')
+
+# menambah kolom waktu yang berformat tahun-bulan
+# data/variable['nama kolom baru'] = dataset['diambil dari kolom apa'].apply(lambda x: mengubah ke tipe data date.format menjadi tahun-bulan)
+dataset['order_month'] = dataset['order_date'].apply(lambda x: datetime.datetime.strptime(x, "%Y-%m-%d").strftime('%Y-%m'))
+
+# menambah kolom GMV
+dataset['gmv'] = dataset['item_price']*dataset['quantity']
+
+# melihat ukuran dataset
+print('Ukuran dataset: %d baris dan %d kolom\n' % dataset.shape)
+# melihat 5 data teratas
+print(dataset.head())
+
+# membuat data agregat
+monthly_amount = dataset.groupby('order_month')['gmv'].sum().reset_index()
+print(monthly_amount)
+
+# mengatur ukuran gambar
+plt.figure(figsize=(15,5))
+
+# membuat line chart trend pertumbuhan GMV
+# plt.plot(x,y)
+# --> plt.plot(monthly_amount['order_month'], monthly_amount['gmv'])
+# cara alternative dan kostumisasinya
+dataset.groupby(['order_month'])['gmv'].sum().plot(color='green', marker='o', linestyle='-.', linewidth=2)
+
+# menambahkan title dan label dan kostumisasinya
+plt.title('Monthly GMV Year 2019', loc='center', pad=20, fontsize=20, color='blue')
+plt.xlabel('Order Month', fontsize=15)
+plt.ylabel('Total Amount (in Billions)', fontsize=15)
+
+# Kostumisasi grid
+plt.grid(color='darkgray', linestyle=':', linewidth=0.5)
+
+# Kostumisasi nilai maksimum dan minimum di sumbu y
+plt.ylim(ymin=0)
+# max pakai ymax
+
+# Kostumisasi Axis Ticks
+labels, locations = plt.yticks()
+plt.yticks(labels, (labels/1000000000).astype(int))
+
+# Menambahkan informasi pada plot
+plt.text(0.45, 0.72, 'The GMV increased significantly on October 2019', transform=fig.transFigure, color='red')
+
+# Menyimpan plot menjadi image dan pengaturan parameter
+plt.savefig('monthly_gmv.png', quality=95) # quality maksimum 95
+
+# menampilkan plot
+plt.show()
