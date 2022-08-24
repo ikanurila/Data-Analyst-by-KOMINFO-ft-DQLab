@@ -1,0 +1,68 @@
+# xyz.com adalah perusahan rintisan B2B yang menjual berbagai produk tidak langsung kepada end user tetapi ke bisnis/perusahaan lainnya
+# Isi tabel:
+# Tabel orders_1 : Berisi data terkait transaksi penjualan periode quarter 1 (Jan – Mar 2004)
+# Tabel Orders_2 : Berisi data terkait transaksi penjualan periode quarter 2 (Apr – Jun 2004)
+# Tabel Customer : Berisi data profil customer yang mendaftar menjadi customer xyz.com
+
+# Memahami Tabel
+SELECT * FROM orders_1 LIMIT 5;
+SELECT * FROM orders_2 LIMIT 5;
+SELECT * FROM customer LIMIT 5;
+
+# Total Penjualan dan Revenue pada Quarter 1 dan Quarter 2
+SELECT SUM(quantity) AS total_penjualan, 
+SUM(quantity*priceeach) AS revenue
+FROM orders_1
+WHERE status='shipped';
+
+SELECT SUM(quantity) AS total_penjualan, 
+SUM(quantity*priceeach) AS revenue
+FROM orders_2
+WHERE status='shipped';
+
+# Menghitung Persentase Keseluruhan Penjualan
+SELECT quarter, SUM(quantity) AS total_penjualan, SUM(quantity*priceeach) AS revenue
+FROM
+(SELECT ordernumber, status, quantity, priceeach, 1 AS quarter FROM orders_1
+UNION
+SELECT ordernumber, status, quantity, priceeach, 2 AS quarter FROM orders_2)
+AS table_a
+WHERE status='Shipped'
+GROUP BY quarter;
+# Perhitungan manual
+# %Growth Penjualan = (6717 – 8694)/8694 = -22%
+# %Growth Revenue = (607548320 – 799579310)/ 799579310 = -24%
+
+# Pertumbuhan Customer
+SELECT quarter, COUNT(DISTINCT(customerID)) AS total_customers
+FROM
+(SELECT customerID, createDate, QUARTER(CreateDate) AS quarter
+FROM customer
+WHERE createDate >= '01-01-2004' AND createDate <= '30-06-2004')
+AS tabel_b
+GROUP BY quarter;
+
+# Customer yang Melakukan Transaksi
+SELECT quarter, COUNT(DISTINCT(customerID)) AS total_customers
+FROM
+(SELECT customerID, createDate, QUARTER(createDate) AS quarter
+FROM customer
+WHERE createDate >= '01-01-2004' AND createDate <= '30-06-2004' AND
+customerID IN (
+	SELECT DISTINCT(customerID) FROM orders_1
+	UNION
+	SELECT DISTINCT(customerID) FROM orders_2
+))
+AS tabel_b
+GROUP BY quarter;
+
+# Customer yang Bertransaksi Aktif Setelah Transaksi Pertamanya
+#Menghitung total unik customers yang transaksi di quarter_1
+SELECT COUNT(DISTINCT customerID) as total_customers FROM orders_1;
+#output = 25
+
+SELECT 1 as quarter, COUNT(DISTINCT customerID)/25*100 AS Q2 FROM orders_1
+WHERE customerID IN(
+	SELECT DISTINCT(customerID) FROM orders_2);
+#output 24.00
+
